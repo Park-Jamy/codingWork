@@ -1,0 +1,34 @@
+#include <iostream>
+#include <vector>
+#include <stack>
+#include <stdio.h>
+using namespace std;
+
+int n; // 외치는 수
+int graph[100001]; // 외치는 값의 수
+
+int main(void) {
+  cin >> n;
+  for(int i = 0; i < n; i++){
+    scanf("%1d", &graph[i]);
+  }
+
+  stack<int> s; // 스택생성
+
+  for(int i = 0; i < n; i++){
+    if(graph[i] == 0){
+      s.pop();
+      continue;
+    }else{
+      s.push(graph[i]);
+    }
+  }
+  int result =0;
+  while(!s.empty()){
+    result += s.top();
+    s.pop();
+  }
+
+  printf("%d", result);
+  return 0;
+}
