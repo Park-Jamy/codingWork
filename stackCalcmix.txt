@@ -1,0 +1,86 @@
+#include <iostream>
+#include <vector>
+#include <stdio.h>
+#include <stack>
+#include <cstdio>
+
+
+using namespace std;
+
+// (: 40 [: 91
+// ): 41 ]: 93
+int main(){
+    
+	char arr[31];	//입력받을 문자열
+	stack <int> s;	//계산할 스택
+	bool isGood = true;
+	int small = 0, big = 0;	//작은괄호 갯수, 큰 괄호 갯수
+	
+  //scanf("%s", &arr);
+	cin >> arr;	//입력받음
+	
+	int top = -1;	//실제로 스택쌓지 않고 올바른 괄호인지 계산용
+	int cal = 1;	//괄호에 따라 누적 계산할 값
+	for(int i=0;;i++){
+		if(arr[i]!='('&&arr[i]!=')'&&arr[i]!='['&&arr[i]!=']') break;
+		
+		//열린소괄호이면 *2
+		if(arr[i]=='('){
+			top++;
+			small++;
+			cal *= 2;
+		}
+		
+		//열린대괄호이면 *3 
+		if(arr[i]=='['){
+			top++;
+			big++;
+			cal *= 3;
+		}
+		
+		//닫힌소괄호이면
+		if(arr[i]==')'){
+			//열린소괄호가 없으면 올바른 괄호가 아님 
+			if(small<=0){
+				isGood = false;
+				break;
+			}
+			//바로전값이 열린소괄호면 스택에 push 
+			if(arr[i-1]=='(') s.push(cal);
+			top--;
+			small--;
+			cal /= 2;
+		}
+		
+		//닫힌대괄호이면
+		if(arr[i]==']'){
+			//열린대괄호가 없으면 올바른 괄호가 아님 
+			if(big<=0){
+				isGood = false;
+				break;
+			}
+			//바로전값이 열린대괄호면 스택에 push 
+			if(arr[i-1]=='[') s.push(cal);
+			top--;
+			big--;
+			cal /= 3;
+		}
+		
+		if(top==-2){
+			isGood = false;
+			break;
+		}
+		
+	}
+	
+	int sum = 0;
+	for(int i=0;!s.empty();i++){
+		sum += s.top();
+		s.pop();
+	}
+	
+	if(!isGood||top!=-1) printf("0");
+	else printf("%d", sum);
+	
+	
+}
