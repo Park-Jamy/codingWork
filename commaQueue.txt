@@ -1,0 +1,45 @@
+#include <iostream>
+#include <vector>
+#include <stdio.h>
+#include <queue>
+
+
+using namespace std;
+
+int m;
+int main(void){
+    cin >> m;
+    int a = 0;
+    queue<int> q;
+    
+    for(int i = 0; i < m; i++){
+        scanf("%1d", &a);
+        q.push(a);
+    }
+    
+    int c = 0;
+    int max = m;
+    
+    
+    while(!q.empty()){
+        if(m%3 != 0){
+            m--;
+            c = q.front();
+            printf("%1d", c);
+            q.pop();
+            continue;
+        }else{
+            c = q.front();
+            if(max == m){
+                printf("%1d", c);
+            }else{
+                printf(",%1d", c);
+            }
+            m--;
+            q.pop();
+        }
+        
+    }
+    
+    return 0;
+}
