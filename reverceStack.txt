@@ -1,0 +1,30 @@
+#include <iostream>
+#include <vector>
+#include <stdio.h>
+#include <stack>
+
+
+using namespace std;
+
+int m;
+
+int main(void){
+    cin >> m;
+    int a = 0;
+    stack<int> s;
+    
+    
+    for(int i = 0; i < m; i++){
+        scanf("%d", &a);
+        s.push(a);
+        a = 0;
+    }
+    
+    for(int i = 0; i < m; i++){
+        a = s.top();
+        printf("%d ", a);
+        s.pop();
+    }
+    
+    return 0;
+}
