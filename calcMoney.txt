@@ -1,0 +1,43 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int m;
+// 10원 50원 100원 500원 1,000원 5,000원 10,000원 50,000원
+int main(void){
+    cin >> m;
+    int result = 0;
+    
+    result += m/50000;
+    m = m%50000;
+    
+    result += m/10000;
+    m = m%10000;
+    
+    result += m/5000;
+    m = m%5000;
+    
+    result += m/1000;
+    m = m%1000;
+    
+    result += m/500;
+    m = m%500;
+    
+    result += m/100;
+    m = m%100;
+    
+    result += m/50;
+    m = m%50;
+    
+    result += m/10;
+    m = m%10;
+    
+    if(m == 0){
+        cout << result;
+    }else{
+        cout << 0;
+    }
+    
+    return 0;
+}
